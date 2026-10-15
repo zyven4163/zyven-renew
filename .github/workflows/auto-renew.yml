@@ -1,0 +1,16 @@
+name: Renew PythonAnywhere
+
+on:
+  schedule:
+    - cron: '0 9 1 * *'  # Runs on the 1st of every month at 9am
+  workflow_dispatch:       # Also lets you trigger it manually
+
+jobs:
+  renew:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Extend web app
+        run: |
+          curl -s -X POST \
+            -H "Authorization: Token ${{ secrets.PA_API_TOKEN }}" \
+            https://www.pythonanywhere.com/api/v0/user/zyven22/webapps/zyven22.pythonanywhere.com/extend/
